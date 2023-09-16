@@ -1,0 +1,52 @@
+.small-btn {
+    width: 110px;
+    height: 30px;
+    margin-bottom: 5px;
+}
+.small-btns {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.choose {
+    display: flex;
+    justify-content: space-around;
+}
+.choose__btn {
+    width: 150px;
+}
+.choose__var {
+    text-align: center;
+}
+.choose__diaposon {
+    text-align: center;
+    font-size: 17px;
+}
+.info {
+    display: flex;
+    flex-direction: column;
+}
+.info__win {
+    margin: 0 auto;
+    font-size: 50px;
+}
+.info__win__title {
+    margin: 0 auto;
+    font-size: 14px;
+}
+.blue {
+    /* width: 50%; */
+    height: 20px;
+    background-color: rgb(70, 70, 157);
+}
+.green {
+    /* width: 50%; */
+    height: 20px;
+    background-color: rgb(59, 184, 59);
+}

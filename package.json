@@ -1,0 +1,67 @@
+{
+  "homepage": "https://davydovmikhail.github.io/rb-three",
+  "name": "rb-three",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@ethersproject/abstract-signer": "^5.7.0",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@typechain/ethers-v5": "^10.2.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.39",
+    "@types/react": "^18.2.17",
+    "@types/react-copy-to-clipboard": "^5.0.4",
+    "@types/react-dom": "^18.2.7",
+    "@types/react-redux": "^7.1.25",
+    "@usedapp/core": "^1.2.10",
+    "axios": "^1.3.4",
+    "bignumber.js": "^9.1.1",
+    "ethers": "^5.7.2",
+    "react": "^18.2.0",
+    "react-copy-to-clipboard": "^5.1.0",
+    "react-dom": "^18.2.0",
+    "react-paginate": "^8.2.0",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.8.1",
+    "react-scripts": "5.0.1",
+    "react-toastify": "^9.1.1",
+    "redux": "^4.2.1",
+    "redux-thunk": "^2.4.2",
+    "set-interval": "^2.1.3",
+    "typechain": "^8.3.1",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "generate-typechain": "typechain --target ethers-v5 --out-dir src/typechain src/abi/*.json",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
+  }
+}
