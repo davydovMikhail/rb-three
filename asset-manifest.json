@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/rb-three/static/css/main.974f23e7.css",
+    "main.js": "/rb-three/static/js/main.d0dbfcd8.js",
+    "index.html": "/rb-three/index.html",
+    "main.974f23e7.css.map": "/rb-three/static/css/main.974f23e7.css.map",
+    "main.d0dbfcd8.js.map": "/rb-three/static/js/main.d0dbfcd8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.974f23e7.css",
+    "static/js/main.d0dbfcd8.js"
+  ]
+}
