@@ -17,13 +17,10 @@ import { useGetGame } from '../hooks/useGetGame';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import SetInterval from 'set-interval'
 import GameItem from '../components/game-item/gameItem';
-import { get } from 'http';
 
 const Main = () => {
     const { activateBrowserWallet, account } = useEthers();
-    const { SetNotification, SetLoader, SetShowOk, 
-        // PushGame, ClearGames
-     } = useActions();
+    const { SetNotification, SetLoader, SetShowOk, PushGame, ClearGames } = useActions();
     const {games} = useTypedSelector(state => state.main);
 
     const start: any = useRef();
@@ -62,20 +59,20 @@ const Main = () => {
         const fetchData = async () => {
             const maxWin = await maxWinHook(); 
             setMaxWin(maxWin as number);
-            // await updateLastGames();
+            await updateLastGames();
         }
         fetchData().catch(console.error);
     },[]);
 
-    // async function updateLastGames() {
-    //     const hashes = await hashesHook() as any[];
-    //     for(let i = 0; i < hashes.length; i++) {
-    //         const game = await gameHook(hashes[i]);
-    //         PushGame(game);
-    //     }
-    // }
+    async function updateLastGames() {
+        const hashes = await hashesHook() as any[];
+        for(let i = 0; i < hashes.length; i++) {
+            const game = await gameHook(hashes[i]);
+            PushGame(game);
+        }
+    }
 
-    async function handlePlay(isGreater: boolean) {
+    async function handlePlay(_right: boolean) {
         if (!account) {
             toast.info('First connect your wallet', {
                 position: "top-center",
@@ -87,17 +84,18 @@ const Main = () => {
             });
             return;
         }
-        // if (maxWin < (getPossibleWin() as number)) {
-        //     toast.info('Possible win exceed the max win', {
-        //         position: "top-center",
-        //         autoClose: 1000,
-        //         hideProgressBar: true,
-        //         pauseOnHover: false,
-        //         draggable: true,
-        //         theme: "colored",
-        //     });
-        //     return;
-        // }
+        const possibleWin = _right ? getRightWin() : getLeftWin();
+        if (maxWin < (possibleWin as number)) {
+            toast.info('Possible win exceed the max win', {
+                position: "top-center",
+                autoClose: 1000,
+                hideProgressBar: true,
+                pauseOnHover: false,
+                draggable: true,
+                theme: "colored",
+            });
+            return;
+        }
         firstIteration.current = true;
         SetLoader(true);
         if((await allowanceHook(account) as number) < Number(amount)) {
@@ -107,7 +105,7 @@ const Main = () => {
         SetNotification('Requesting the hash of your game...');
         const hashBefore = await hashHook(account);
         const balanceBefore = (await getBalanceHook(account as string)) as number;
-        const targetBlock = (await requestHook(amount, percent, isGreater))?.blockNumber.toString() as string;
+        const targetBlock = (await requestHook(amount, point, _right))?.blockNumber.toString() as string;
         SetNotification('Confirm the call to the play function');
         SetInterval.start(async () => {
             const currentBlock = (await blockHook()) as number;
@@ -128,8 +126,8 @@ const Main = () => {
                 setBalance(balanceAfter);
                 const maxWin = await maxWinHook(); 
                 setMaxWin(maxWin as number);
-                // ClearGames();
-                // await updateLastGames();
+                ClearGames();
+                await updateLastGames();
             }
         }, 500, "checkHash")
     }
@@ -373,7 +371,7 @@ const Main = () => {
                                         </div>
                                         <div className="col-sm-1">
                                             <div className="form-group">
-                                                <label>Chance(%)</label>
+                                                <label>SplitPoint</label>
                                             </div>
                                         </div>
                                         <div className="col-sm-2">

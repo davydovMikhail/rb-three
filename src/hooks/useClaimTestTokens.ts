@@ -13,7 +13,7 @@ export const useClaimTestTokens = () => {
       if (!TokenContract) return;
       await switchNetwork(Sepolia.chainId);
       try {
-        const claimAmount = utils.parseEther("1000000");
+        const claimAmount = utils.parseEther("100000");
         const txPromise = await TokenContract.mint(account as string, claimAmount);
         const tx = await txPromise.wait();
         toast.success('Claimed!', {
